@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+<head>
+    <meta charset="UTF-8">
+    <title>投稿一覧</title>
+</head>
+<body>
+    <h2>ようこそ！</h2>
+
+
+    <h2>最新の投稿</h2>
+
+    <!--template engine-->
+    {% for post in posts.all %}
+
+        # {{ post.id }}:
+        {{ post.title }}
+        <br /><br />
+        {{ post.published }}
+        <br /><br />
+        <img src="{{ post.image.url }}">
+        {{ post.summary }}
+        <br /><br />
+
+    {% endfor %}
+
+</body>
+</html>
