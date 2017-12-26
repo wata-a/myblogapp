@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'posts.apps.PostsConfig'
+    'posts.apps.PostsConfig',
+    'sendemails.apps.SendemailsConfig'
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'myblogapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,3 +129,17 @@ MEDIA_URL = '/pics/'
 # BASE_DIRはsetting.pyの16行目
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = BASE_DIR
+
+# 全てのstaticファイルを同じパスに集める
+STATIC_ROOT = BASE_DIR + '/sitestatic/'
+
+# コンソールバックエンドを設定。実際にメールを送信する代わりに、コンソールに表示
+# 本番環境では不要！
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+BASICAUTH_USERNAME = 'ユーザ'
+BASICAUTH_PASSWORD = 'パスワード'
+
+MIDDLEWARE_CLASSES = (
+    'middleware.BasicAuthMiddleware',   #追加
+)
